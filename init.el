@@ -12,6 +12,8 @@
       inhibit-startup-message t)
 (auto-save-visited-mode 1)
 
+(windmove-default-keybindings)
+
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ;;(set-fringe-mode 8)
@@ -62,6 +64,13 @@
 
 (use-package command-log-mode)
 
+(use-package dimmer
+  :init
+  (dimmer-configure-which-key)
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (dimmer-mode t))
+
 (use-package counsel ; Brings in counsel, ivy and swiper
   :bind
   (("C-s" . swiper-isearch)
@@ -87,6 +96,10 @@
   :init
   (ivy-rich-mode 1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
