@@ -73,6 +73,12 @@
   (setq enable-recursive-minibuffers t)
   (setq ivy-count-format "(%d/%d) "))
 
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1)
+  (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
+
+;; NOTE: Requires https://github.com/ryanoasis/nerd-fonts/releases/download/latest/NerdFontsSymbolsOnly.tar.xz
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 16)))
