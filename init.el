@@ -91,8 +91,21 @@
   :init (which-key-mode)
   :config (setq which-key-idle-delay 1))
 
+(use-package helpful
+  :ensure t
+  :bind
+  (("C-h f" . helpful-callable)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h x" . helpful-command)
+   ("C-c C-d" . helpful-at-point)
+   ("C-h F" . helpful-function))
+  :config
+  (when (package-installed-p 'counsel)
+    (setq counsel-describe-function-function #'helpful-callable
+          counsel-describe-variable-function #'helpful-variable)))
+
 (use-package sly)
 
 (use-package magit)
-
 
