@@ -11,7 +11,6 @@
 (setq visible-bell t
       inhibit-startup-message t)
 
-(load-theme 'tango-dark)
 (tool-bar-mode -1)
 ;;(set-fringe-mode 8)
 (set-face-attribute 'default nil :font "Iosevka IBM Flavor" :height 128) ; See iosevka-build.toml
@@ -92,7 +91,6 @@
   :config (setq which-key-idle-delay 1))
 
 (use-package helpful
-  :ensure t
   :bind
   (("C-h f" . helpful-callable)
    ("C-h v" . helpful-variable)
@@ -104,6 +102,23 @@
   (when (package-installed-p 'counsel)
     (setq counsel-describe-function-function #'helpful-callable
           counsel-describe-variable-function #'helpful-variable)))
+
+(use-package doom-themes
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-ayu-mirage t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (nerd-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-ayu-mirage")
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
 
 (use-package sly)
 
