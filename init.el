@@ -10,6 +10,7 @@
 
 (setq visible-bell t
       inhibit-startup-message t)
+(auto-save-visited-mode 1)
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
@@ -33,6 +34,10 @@
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+;; Org mode bindings
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
 
 ;;; 3rd Party Packages
 
@@ -137,6 +142,4 @@
 (use-package magit)
 
 (use-package sly)
-
-
 
