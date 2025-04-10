@@ -12,6 +12,7 @@
       inhibit-startup-message t)
 
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 ;;(set-fringe-mode 8)
 (set-face-attribute 'default nil :font "Iosevka IBM Flavor" :height 128) ; See iosevka-build.toml
 
@@ -51,7 +52,11 @@
   (require 'use-package))
 (setq use-package-always-ensure t)
 
+(use-package all-the-icons
+  :if (display-graphic-p))
+
 (use-package command-log-mode)
+
 (use-package counsel ; Brings in counsel, ivy and swiper
   :bind
   (("C-s" . swiper-isearch)
@@ -66,7 +71,8 @@
    ("<f2> j" . counsel-set-variable)
    ("C-x b" . ivy-switch-buffer)
    ("C-c v" . ivy-push-view)
-   ("C-c V" . ivy-pop-view))
+   ("C-c V" . ivy-pop-view)
+   ("C-x M-b" . counsel-switch-buffer))
   :init (ivy-mode 1)
   :config
   (setq enable-recursive-minibuffers t)
@@ -77,7 +83,6 @@
   (ivy-rich-mode 1)
   (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 
-;; NOTE: Requires https://github.com/ryanoasis/nerd-fonts/releases/download/latest/NerdFontsSymbolsOnly.tar.xz
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 16)))
@@ -108,14 +113,14 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-ayu-mirage t)
+  (load-theme 'doom-one t)
 
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (nerd-icons must be installed!)
   (doom-themes-neotree-config)
   ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-ayu-mirage")
+  (setq doom-themes-treemacs-theme "doom-one")
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
