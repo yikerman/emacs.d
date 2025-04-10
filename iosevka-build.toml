@@ -1,0 +1,13 @@
+# Iosevka private-build-plans.toml reference config
+
+[buildPlans.IosevkaIBMFlavor]
+family = "Iosevka IBM Flavor"
+spacing = "fixed"
+serifs = "sans"
+noCvSs = true
+exportGlyphNames = false
+noLigation = true
+
+  [buildPlans.IosevkaIBMFlavor.variants]
+  inherits = "ss15"
+

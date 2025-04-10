@@ -14,7 +14,7 @@
 (load-theme 'tango-dark)
 (tool-bar-mode -1)
 ;;(set-fringe-mode 8)
-(set-face-attribute 'default nil :font "IBM Plex Mono" :height 128)
+(set-face-attribute 'default nil :font "Iosevka IBM Flavor" :height 128) ; See iosevka-build.toml
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; ESC quit prompts
 (global-auto-revert-mode 1) ; Reload file automatically
@@ -73,9 +73,20 @@
   (setq enable-recursive-minibuffers t)
   (setq ivy-count-format "(%d/%d) "))
 
-(use-package doom-modeline :init (doom-modeline-mode 1))
+(use-package doom-modeline
+  :init (doom-modeline-mode 1)
+  :custom ((doom-modeline-height 16)))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; TODO: Use built-in which-key in emacs 30+
+(use-package which-key
+  :init (which-key-mode)
+  :config (setq which-key-idle-delay 1))
 
 (use-package sly)
+
 (use-package magit)
 
 
