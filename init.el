@@ -114,7 +114,6 @@
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
   (load-theme 'doom-one t)
-
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config)
   ;; Enable custom neotree theme (nerd-icons must be installed!)
@@ -125,7 +124,19 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-(use-package sly)
+(use-package projectile
+  :bind-keymap ("C-c p" . projectile-command-map)
+  :config (projectile-mode 1)
+  :custom ((projectile-completion-system 'ivy))
+  :init
+  (let ((d "~/Developer"))
+    (when (file-directory-p d)
+     (setq projectile-project-search-path (list d))))
+  (setq projectile-switch-project-action #'projectile-dired))
 
 (use-package magit)
+
+(use-package sly)
+
+
 
