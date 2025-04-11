@@ -11,3 +11,13 @@ noLigation = true
   [buildPlans.IosevkaIBMFlavor.variants]
   inherits = "ss15"
 
+[buildPlans.IosevkaIBMSlabFlavor]
+family = "Iosevka IBM Slab Flavor"
+spacing = "normal"
+serifs = "slab"
+noCvSs = true
+exportGlyphNames = false
+noLigation = true
+
+  [buildPlans.IosevkaIBMSlabFlavor.variants]
+  inherits = "ss15"
