@@ -248,6 +248,12 @@
   ;; load default config
   (require 'smartparens-config))
 
+(use-package markdown-mode
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+         ("C-c C-e" . markdown-do)))
+
 (use-package sly)
 
 (use-package racket-mode)
