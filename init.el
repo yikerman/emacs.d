@@ -47,6 +47,7 @@
 (global-set-key (kbd "C-c ]") (lambda () (interactive) (enlarge-window  5)))
 (global-set-key (kbd "C-c [") (lambda () (interactive) (enlarge-window -5)))
 
+;; C-c t to launch a terminal
 (defun split-and-launch-term ()
   (interactive)
   (split-window-below)
@@ -54,6 +55,11 @@
   (windmove-down)
   (eshell))
 (global-set-key (kbd "C-c t") #'split-and-launch-term)
+;; Closes the current window when eshell exits
+(defun eshell-exit-and-close-window ()
+  (when (not (one-window-p))
+    (delete-window)))
+(add-hook 'eshell-exit-hook 'eshell-exit-and-close-window)
 
 
 ;;; 3rd Party Packages
@@ -235,6 +241,12 @@
 (treemacs-start-on-boot)
 
 ;;(use-package vterm)
+
+(use-package smartparens
+  :hook (prog-mode text-mode markdown-mode racket-mode emacs-lisp-mode lisp-mode)
+  :config
+  ;; load default config
+  (require 'smartparens-config))
 
 (use-package sly)
 
