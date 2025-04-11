@@ -41,6 +41,10 @@
 (global-set-key (kbd "C-c a") #'org-agenda)
 (global-set-key (kbd "C-c c") #'org-capture)
 
+;; When I say enlarge, I mean larger
+(global-set-key (kbd "C-c C-]") (lambda () (interactive) (enlarge-window-horizontally  30)))
+(global-set-key (kbd "C-c C-[") (lambda () (interactive) (enlarge-window-horizontally -30)))
+
 ;;; 3rd Party Packages
 
 (require 'package)
