@@ -31,6 +31,7 @@
 (global-display-line-numbers-mode t)
 (dolist (mode '(org-mode-hook
                 term-mode-hook
+                ;vterm-mode-hook
                 shell-mode-hook
                 eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
@@ -51,7 +52,7 @@
   (split-window-below)
   (enlarge-window 10)
   (windmove-down)
-  (term (getenv "SHELL")))
+  (eshell))
 (global-set-key (kbd "C-c t") #'split-and-launch-term)
 
 
@@ -151,7 +152,7 @@
   ;; Enable custom neotree theme (nerd-icons must be installed!)
   (doom-themes-neotree-config)
   ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-one")
+  (setq doom-themes-treemacs-theme "doom-atom")
   (doom-themes-treemacs-config)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
@@ -168,7 +169,15 @@
 
 (defun setup-org-mode ()
   (org-indent-mode 1)
-  (visual-line-mode 1))
+  (visual-line-mode 1)
+  (dolist (face '((org-level-1 . 1.2)
+                (org-level-2 . 1.1)
+                (org-level-3 . 1.05)
+                (org-level-4 . 1.0)
+                (org-level-5 . 0.99)
+                (org-level-6 . 0.98)
+                (org-level-7 . 0.97)))
+  (set-face-attribute (car face) nil :font "Iosevka IBM Slab Flavor" :weight 'bold :height (cdr face))))
 (use-package org
   :hook (org-mode . setup-org-mode)
   :config
@@ -176,14 +185,6 @@
         org-hide-emphasis-markers t))
 (use-package org-appear
   :hook (org-mode . org-appear-mode))
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.1)
-                (org-level-3 . 1.05)
-                (org-level-4 . 1.0)
-                (org-level-5 . 0.99)
-                (org-level-6 . 0.98)
-                (org-level-7 . 0.97)))
-  (set-face-attribute (car face) nil :font "Iosevka IBM Slab Flavor" :weight 'bold :height (cdr face)))
 
 (use-package magit)
 
@@ -232,6 +233,8 @@
 (use-package treemacs-magit
   :after (treemacs magit))
 (treemacs-start-on-boot)
+
+;;(use-package vterm)
 
 (use-package sly)
 
