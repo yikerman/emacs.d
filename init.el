@@ -176,6 +176,8 @@
 (defun setup-org-mode ()
   (org-indent-mode 1)
   (visual-line-mode 1)
+  (modify-syntax-entry ?< "." org-mode-syntax-table)
+  (modify-syntax-entry ?> "." org-mode-syntax-table)
   (dolist (face '((org-level-1 . 1.2)
                 (org-level-2 . 1.1)
                 (org-level-3 . 1.05)
@@ -254,9 +256,12 @@
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
 
-(use-package sly)
+(use-package sly
+  :bind (:map sly-prefix-map
+         ("M-h" . sly-documentation-lookup)))
 
-(use-package racket-mode)
+(use-package racket-mode
+  :hook (racket-mode . racket-xp-mode))
 
 (use-package geiser-chez)
 
