@@ -3,4 +3,5 @@
 !/early-init.el
 !/init.el
 !/iosevka-build.toml
+!/lean4-mode
 

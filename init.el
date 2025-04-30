@@ -173,28 +173,51 @@
      (setq projectile-project-search-path (list d))))
   (setq projectile-switch-project-action #'projectile-dired))
 
+(defun disable-windmove-in-org-agenda ()
+  "Disable windmove keybindings in Org Agenda buffers."
+  (let ((map (make-sparse-keymap)))
+    ;; Define empty bindings to override windmove
+    (define-key map (kbd "S-<left>") nil)
+    (define-key map (kbd "S-<right>") nil)
+    (define-key map (kbd "S-<up>") nil)
+    (define-key map (kbd "S-<down>") nil)
+    
+    ;; Use higher priority keymap to override windmove bindings
+    (set-keymap-parent map (current-local-map))
+    (use-local-map map)))
 (defun setup-org-mode ()
   (org-indent-mode 1)
   (visual-line-mode 1)
   (modify-syntax-entry ?< "." org-mode-syntax-table)
   (modify-syntax-entry ?> "." org-mode-syntax-table)
   (dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.1)
-                (org-level-3 . 1.05)
-                (org-level-4 . 1.0)
-                (org-level-5 . 0.99)
-                (org-level-6 . 0.98)
-                (org-level-7 . 0.97)))
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 0.99)
+                  (org-level-6 . 0.98)
+                  (org-level-7 . 0.97)))
   (set-face-attribute (car face) nil :font "Iosevka IBM Slab Flavor" :weight 'bold :height (cdr face))))
 (use-package org
-  :hook (org-mode . setup-org-mode)
+  :hook
+  (org-mode . setup-org-mode)
+  (calender-mode . disable-windmove-in-org-agenda)
   :config
   (setq org-ellipsis " ▼"
-        org-hide-emphasis-markers t))
+        org-hide-emphasis-markers t
+        org-agenda-start-with-log-mode t
+        org-log-done 'time
+        org-log-into-drawer t
+        org-todo-keywords '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+                            (sequence "BACKLOG(b)" "ACTIVE(a)" "WAIT(w@/!)" "|" "COMPLETED(c)" "CANC(k@)"))
+        ;org-agenda-files '("~/VaultMnt/OrgFiles/Tasks.org"
+        ;                   "~/VaultMnt/OrgFiles/Birthdays.org")
+                           ))
 (use-package org-appear
   :hook (org-mode . org-appear-mode))
 
 (use-package magit)
+(use-package magit-section)
 
 (use-package treemacs
   :defer t
@@ -265,3 +288,9 @@
 
 (use-package geiser-chez)
 
+(use-package lsp-mode)
+
+(use-package dash)
+
+(add-to-list 'load-path (expand-file-name "lean4-mode" user-emacs-directory))
+(require 'lean4-mode)
