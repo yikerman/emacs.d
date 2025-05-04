@@ -292,5 +292,12 @@
 
 (use-package dash)
 
-(add-to-list 'load-path (expand-file-name "lean4-mode" user-emacs-directory))
-(require 'lean4-mode)
+(use-package lean4-mode
+  :commands lean4-mode
+  :vc (:url "https://github.com/leanprover-community/lean4-mode.git"
+       :rev :last-release
+       ;; Or, if you prefer the bleeding edge version of Lean4-Mode:
+       ;; :rev :newest
+       ))
+
+
