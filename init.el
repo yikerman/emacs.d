@@ -16,7 +16,7 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ;;(set-fringe-mode 8)
-(set-face-attribute 'default nil :font "Iosevka IBM Flavor" :height 128) ; See iosevka-build.toml
+(set-face-attribute 'default nil :font "Iosevka Fixed SS15" :height 128)
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; ESC quit prompts
 (global-auto-revert-mode 1) ; Reload file automatically
@@ -197,7 +197,7 @@
                   (org-level-5 . 0.99)
                   (org-level-6 . 0.98)
                   (org-level-7 . 0.97)))
-  (set-face-attribute (car face) nil :font "Iosevka IBM Slab Flavor" :weight 'bold :height (cdr face))))
+  (set-face-attribute (car face) nil :font "Iosevka Slab" :weight 'bold :height (cdr face))))
 (use-package org
   :hook
   (org-mode . setup-org-mode)
